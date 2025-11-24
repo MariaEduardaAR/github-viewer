@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>GitHub Viewer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>GitHub Viewer</h1>
+
+    <div class="form">
+      <label for="username">Usuário do GitHub:</label>
+      <input id="username" type="text" placeholder="ex: octocat" />
+      <button id="loadRepos">Buscar repositórios</button>
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <ul id="repoList" class="repo-list"></ul>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
