@@ -10,8 +10,8 @@ app.use(cors());
 app.use(express.json());
 
 // 🔐 SUAS CREDENCIAIS - SUBSTITUA COM AS DO SEU APP GITHUB
-const CLIENT_ID = 'Ov23liP7RJTx5g95uGCr';
-const CLIENT_SECRET = '5e2d4e1051b286abd7cc7bcb6df1339ab6b24fc4'; // Você vai pegar isso no GitHub
+const CLIENT_ID = 'YOUR_GITHUB_CLIENT_ID'; // Você vai pegar isso no GitHub
+const CLIENT_SECRET = 'YOUR_GITHUB_CLIENT_SECRET'; // Você vai pegar isso no GitHub
 
 // Rota para trocar código por token
 app.post('/api/exchange-token', async (req, res) => {

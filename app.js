@@ -21,7 +21,8 @@ let currentToken = null;
 // UTILITÁRIOS PKCE
 // ==========================================
 
-function generateRandomString(length) {
+function generateRandomString(length) {  // Geração segura do code_verifier
+
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
   const values = crypto.getRandomValues(new Uint8Array(length));
   return Array.from(values)
@@ -29,7 +30,7 @@ function generateRandomString(length) {
     .join('');
 }
 
-async function sha256(plain) {
+async function sha256(plain) {  // Função para hash SHA-256
   const encoder = new TextEncoder();
   const data = encoder.encode(plain);
   return await crypto.subtle.digest('SHA-256', data);
@@ -45,7 +46,7 @@ function base64urlencode(buffer) {
     .replace(/=+$/g, '');
 }
 
-async function generateCodeChallenge(verifier) {
+async function generateCodeChallenge(verifier) { // PKCE com SHA-256
   const hashed = await sha256(verifier);
   return base64urlencode(hashed);
 }
