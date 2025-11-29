@@ -2,22 +2,80 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>GitHub Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub OAuth Viewer - PKCE</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>GitHub Viewer</h1>
+    <!-- PÁGINA DE LOGIN (Pública) -->
+    <div id="loginPage" class="page">
+      <h1>🔐 GitHub OAuth Viewer</h1>
+      <p class="subtitle">OAuth 2.0 com PKCE - Perfil Viewer</p>
 
-    <div class="form">
-      <label for="username">Usuário do GitHub:</label>
-      <input id="username" type="text" placeholder="ex: octocat" />
-      <button id="loadRepos">Buscar repositórios</button>
+      <div id="loginMessage" class="message"></div>
+
+      <div class="login-box">
+        <h2>Faça login para visualizar seus repositórios</h2>
+        <button id="loginButton" class="btn btn-primary">
+          🔒 Login com GitHub OAuth
+        </button>
+        <button id="demoButton" class="btn btn-demo">🎭 Ver Demonstração</button>
+
+        <div class="security-info">
+          <strong>🔒 Segurança Implementada:</strong>
+          <ul>
+            <li>✅ OAuth 2.0 Authorization Code Flow</li>
+            <li>✅ PKCE (Proof Key for Code Exchange)</li>
+            <li>✅ State validation (proteção CSRF)</li>
+            <li>✅ Token armazenado em memória</li>
+          </ul>
+          <p><strong>Scope:</strong> <code>read:user</code> (Perfil Viewer)</p>
+        </div>
+      </div>
     </div>
 
-    <div id="message" class="message"></div>
+    <!-- DASHBOARD (Privada - após login) -->
+    <div id="dashboardPage" class="page hidden">
+      <div class="header">
+        <h1>📚 GitHub Viewer</h1>
+        <button id="logoutButton" class="btn btn-logout">Logout</button>
+      </div>
 
-    <ul id="repoList" class="repo-list"></ul>
+      <!-- Barra de Busca -->
+      <div class="search-container">
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="🔍 Buscar repositórios por nome, descrição ou linguagem..."
+          class="search-input"
+        >
+        <button id="clearSearch" class="btn btn-clear">Limpar</button>
+      </div>
+
+      <!-- Informações do Usuário -->
+      <div id="userInfo" class="user-info hidden"></div>
+
+      <!-- Scopes Concedidos -->
+      <div id="scopesInfo" class="scopes hidden"></div>
+
+      <!-- Mensagens -->
+      <div id="dashboardMessage" class="message"></div>
+
+      <!-- Contador de Resultados -->
+      <div id="resultsInfo" class="results-info hidden"></div>
+
+      <!-- Lista de Repositórios -->
+      <ul id="repoList" class="repo-list"></ul>
+    </div>
+
+    <!-- LOADING -->
+    <div id="loadingPage" class="page hidden">
+      <div class="loading">
+        <div class="spinner"></div>
+        <p>Autenticando com GitHub...</p>
+      </div>
+    </div>
   </div>
 
   <script src="app.js"></script>
